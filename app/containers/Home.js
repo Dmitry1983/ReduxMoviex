@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 import mockMovies from '../mockMovies';
 import MovieRow from '../components/MovieRow'
@@ -25,11 +26,11 @@ export default class Home extends Component {
       <View style={styles.container}>
         <FlatList
           data={movies}
-          renderItem={({ item: movie }) => (
+          renderItem={({ item: movie2 }) => (
             // <View>
             //   <Text>{movie.Title}</Text>
             // </View>
-            <MovieRow movie={movie} />
+            <MovieRow movie={movie2} />
           )}
           keyExtractor={(movie) => movie.imdbID}
         />
@@ -41,5 +42,6 @@ export default class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#e8e6bd'
   }
 })
