@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, Image, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-//Icon.loadFont();
+Icon.loadFont();
 
 export default function MovieRow({ movie }) {
     return (
