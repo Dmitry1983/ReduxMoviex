@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
-import mockMovies from '../mockMovies';
+// import mockMovies from '../mockMovies';
 import MovieRow from '../components/MovieRow'
 
 class Home extends Component {
+
   constructor(props) {
     super(props)
     // this.state = {
@@ -13,16 +14,18 @@ class Home extends Component {
   }
 
   async componentDidMount() {
+    const { addMovies } = this.props
     const url = 'http://www.omdbapi.com/?apikey=38bf28a2&s=batman';
     const response = await fetch(url);
     const data = await response.json();
+    addMovies(data.Search);
     // this.setState({ movies: data.Search });
   }
 
   render() {
     const { movies } = this.props
-    //const { movies } = this.state
-
+    // const { movies } = this.state
+    console.log(movies)
     return (
       <View style={styles.container}>
         <FlatList
@@ -46,12 +49,22 @@ const styles = StyleSheet.create({
     backgroundColor: '#e8e6bd'
   }
 })
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return {
     movies: state
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addMovies: (movies) => dispatch({
+      type: 'ADD_MOVIES',
+      payload: { movies }
+    })
+  }
+}
+
 export default connect(
   mapStateToProps,
+  mapDispatchToProps,
 )(Home)
